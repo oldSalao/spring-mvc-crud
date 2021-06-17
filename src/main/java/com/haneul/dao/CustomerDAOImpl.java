@@ -21,7 +21,6 @@ public class CustomerDAOImpl implements CustomerDAO{
     }
 
     @Override
-    @Transactional
     public List<Customer> getCustomers() {
         Query<Customer> theQuery = null;
         List<Customer> customerList=null;

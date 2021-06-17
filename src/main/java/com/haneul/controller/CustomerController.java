@@ -2,9 +2,12 @@ package com.haneul.controller;
 
 import com.haneul.dao.CustomerDAO;
 import com.haneul.entity.Customer;
+import com.haneul.service.CustomerService;
+import com.haneul.service.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -13,19 +16,19 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    private CustomerDAO customerDAO;
+    private CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerDAO customerDAO){
-        this.customerDAO = customerDAO;
+    public CustomerController(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
-    @RequestMapping("/list")
-    public String listCustomers(Model theModel){
+    @GetMapping("/list")
+    public String listCustomers(Model theModel) {
 
-        List<Customer> customerList = customerDAO.getCustomers();
+        List<Customer> customerList = customerService.getCustomers();
 
-        theModel.addAttribute("customerList",customerList);
+        theModel.addAttribute("customerList", customerList);
 
         return "list-customers";
     }
